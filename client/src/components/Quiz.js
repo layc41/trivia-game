@@ -1,69 +1,71 @@
 import React, { useState } from "react";
-import { Container, Col, Card, CardGroup, Row } from "react-bootstrap";
+import { Link } from 'react-router-dom';
+import { Container, Col, Card, CardGroup, Row, Button } from "react-bootstrap";
 import { generateQuiz } from "../utils/API";
 
-export default function Quiz() {
+function Quiz() {
     const [quizData, setQuizData] = useState([]);
+    const [answersArray, setAnswersArray] = useState([]);
+    const [score, setScore] = useState(0);
 
     const handleFormSubmit = async (event) => {
+
         event.preventDefault();
         try {
-            // removed await
+            
             await generateQuiz()
             .then((response) => response.json())
-            // .then((data) => setQuizData(data.results));
-            .then((data) => setQuizData(JSON.parse(JSON.stringify(data.results).replace(/&quot;/g, "''"))))
-            // setQuizData(JSON.parse(quizData.replace(/&quot;/g,'"')));
-            // var stringified = JSON.stringify(quizData);
-            // console.log('stringified', stringified)
-            // stringified = stringified.replace(/&quot;/g, '"');
-            // quizData = JSON.parse(stringified);
-            // setQuizData(JSON.parse(stringified));
-            // var data = $('<div>').html('[{&quot;Id&quot;:1,&quot;Name&quot;:&quot;Name}]')[0].textContent;
-
+            .then((data) => setQuizData(JSON.parse(JSON.stringify(data.results).replace(/&quot;/g, "''").replace(/&#039;/g, "'"))));
             
-            
-            //   console.log('results', results)
-            //   if (!response.ok) {
-            //     throw new Error("something went wrong!");
-            //   }
-
-            // quizData.map(quiz) => ({
-            //     question: quiz.question,
-            //     right: quiz.correct,
-            //     wrong: quiz.wrong
-            // });
-            
-            //   setQuizData(
-            //     resultData.map((quiz) => ({
-            //       question: quiz.question,
-            //       right: quiz.correct,
-            //       wrong: quiz.wrong,
-            //     }))
-            //   );
         } catch (error) {
+
             console.error(error);
+
         }
+    }
+
+    const handleClickAnswer = (event, bool) => {
+        
+        let id = event.target.id;
+        let answer = id.split('-')[1];
+        let questionIndex = id.split('-')[0];
+        var myArray = answersArray;
+        
+        myArray[questionIndex] = (answer === 'true');
+        setAnswersArray(myArray);
+
+    }
+
+    const handleSubmitQuiz = (event) => {
+        
+        let correctAnswerArr = []
+        
     }
 
     return (
       <Container>
-        <button onClick={handleFormSubmit}>Submit</button>
-        {quizData.map((quiz) => {
+        <div className="ml-auto my-2 my-lg-0">
+          <button onClick={handleFormSubmit} className="btn btn-dark rounded-pill">Create Quiz</button>
+        </div>
+        
+        {quizData.map((quiz,index) => {
           return (
-            <CardGroup>
+            <CardGroup key={index}>
               <Row>
                 <Col>
-                  <Card border="dark">
+                  <Card border="dark" id={index+"QuestionCard"}>
                     <Card.Body>
                       <Card.Title className="text-center card-title">
                         {quiz.question}
-                        {console.log("test")}
                       </Card.Title>
 
                       <Card.Text>
-                        {quiz.correct_answer}
-                        {quiz.incorrect_answers[0]}
+                        <button className="btn btn-primary" id={index+"-true"} onClick={(e)=>handleClickAnswer(e,true)}>True</button>
+                        <button className="btn btn-primary" id={index+"-false"} onClick={(e)=>handleClickAnswer(e,false)}>False</button>
+                        {/* <Button className="btn btn-primary">True</Button> */}
+                        {/* <Button className="btn btn-primary">False</Button> */}
+                        {/* {quiz.correct_answer} */}
+                        {/* {quiz.incorrect_answers[0]} */}
                       </Card.Text>
                     </Card.Body>
                   </Card>
@@ -72,6 +74,12 @@ export default function Quiz() {
             </CardGroup>
           );
         })}
+        <div className="ml-auto my-2 my-lg-0">
+            <a className="btn btn-dark rounded-pill" href="/score">Submit Quiz!</a>
+        </div>
       </Container>
   );
 }
+
+export default Quiz;
+// export score;

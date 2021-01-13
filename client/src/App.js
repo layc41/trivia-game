@@ -1,17 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
-// import { ApolloProvider } from '@apollo/react-hooks';
+import "./App.css";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // Pages
-import Quiz from './components/Quiz'
+import Quiz from "./components/Quiz";
+import Footer from "./components/Footer";
+import NoMatch from "./pages/NoMatch";
+import Score from './components/Score';
+import Login  from './components/LoginForm'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <Quiz/>
-      </header>
-    </div>
+    <Router>
+      <>
+        <Switch>
+          <Route exact path="/" component={Quiz} />
+          <Route exact path="/score" component={Score} />
+          <Route exact path="/login" component={Login} />
+          <Route component={NoMatch} />
+        </Switch>
+        <Footer />
+      </>
+    </Router>
   );
 }
 
