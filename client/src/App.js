@@ -16,6 +16,7 @@ function App() {
           <Route exact path="/" component={Quiz} />
           <Route exact path="/score" component={Score} />
           <Route exact path="/login" component={Login} />
+          {/* I figured out why the endpoint wasn't working. It's because I put the /score after the NoMatch Route (Order Matters) */}
           <Route component={NoMatch} />
         </Switch>
         <Footer />

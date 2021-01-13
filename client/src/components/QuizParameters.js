@@ -1,6 +1,8 @@
 import React from 'react';
 // import score from './Quiz';
 
+
+// I'm unsure how to incoroporate this. 
 export default function Score() {
     // console.log("score", score);
     return (

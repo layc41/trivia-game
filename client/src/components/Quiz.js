@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
-import { Container, Col, Card, CardGroup, Row, Button } from "react-bootstrap";
+import { Container, Col, Card, CardGroup, Row} from "react-bootstrap";
 import { generateQuiz } from "../utils/API";
 
 function Quiz() {
