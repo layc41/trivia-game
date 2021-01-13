@@ -1,13 +1,12 @@
-/* * {
+* {
   padding: 0;
-  margin: 0;
-
-} */
+  margin: auto;
+}
 
 body {
   margin: 0;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  background-color: #103557!important;
+  background-color: #ffffff!important;
   text-align: center;
   padding-bottom: 90px;
 }
@@ -60,7 +59,7 @@ code {
 }
 
 .title {
-  color: #f1faee; 
+  color: #175a00; 
   font-size: 72px; 
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   text-align: center;
@@ -95,24 +94,6 @@ code {
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
-.saved-link {
-  position:absolute;
-  top:35px;
-  right:10px;
-  color: #ff4411; 
-  font-size: 24px; 
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-}
-
-.popular-link {
-  position:absolute;
-  top:65px;
-  right:10px;
-  color: #ff4411; 
-  font-size: 24px; 
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-} 
-
 .search {
   padding: 20px;
   margin-top: 20px;
@@ -135,13 +116,9 @@ img {
   max-width: 320px;
 }
 
-.card-text {
-  padding-left: 10px;
-}
-
 .card-title {
   size: 48px;
-  color: #e63946;
+  color: #ffffff;
 }
 
 footer {
@@ -154,7 +131,7 @@ footer {
   font-size: 30px;
   text-decoration: none;
   color: black;
-  background-color: #457b9d;
+  background-color: #ff6b6b;
 }
 
 a {
@@ -220,15 +197,18 @@ a {
    font-size: 2rem!important;
  }
 
- nav {
-  background-color: #457b9d!important;
- }
-
  .btn-primary {
-   background-color: #457b9d!important;
+   background-color: #292f36!important;
  }
 
  .card {
-   background-color: #f1faee!important;
+   background-color: #4ecdc4!important;
  }
 
+.card-group {
+     display: block!important;
+ }
+
+ .red {
+    background-color: #ff6b6b;
+ }

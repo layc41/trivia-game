@@ -37,34 +37,30 @@ function Quiz() {
 
     const handleSubmitQuiz = (event) => {
         
-        let correctAnswerArr = []
+        let correctAnswerArr = quizData.map((quiz) => ({ correct: quiz.correct_answer}))
+        console.log('correct', correctAnswerArr)
         
     }
 
     return (
       <Container>
-        <div className="ml-auto my-2 my-lg-0">
+        <div className="text-center">
           <button onClick={handleFormSubmit} className="btn btn-dark rounded-pill">Create Quiz</button>
         </div>
         
-        {quizData.map((quiz,index) => {
+        {quizData.map((quiz, index) => {
           return (
             <CardGroup key={index}>
               <Row>
                 <Col>
-                  <Card border="dark" id={index+"QuestionCard"}>
+                  <Card border="dark" style={{width: '58rem'}} id={index+"QuestionCard"}>
                     <Card.Body>
                       <Card.Title className="text-center card-title">
                         {quiz.question}
                       </Card.Title>
-
-                      <Card.Text>
+                      <Card.Text className='text-center'>
                         <button className="btn btn-primary" id={index+"-true"} onClick={(e)=>handleClickAnswer(e,true)}>True</button>
                         <button className="btn btn-primary" id={index+"-false"} onClick={(e)=>handleClickAnswer(e,false)}>False</button>
-                        {/* <Button className="btn btn-primary">True</Button> */}
-                        {/* <Button className="btn btn-primary">False</Button> */}
-                        {/* {quiz.correct_answer} */}
-                        {/* {quiz.incorrect_answers[0]} */}
                       </Card.Text>
                     </Card.Body>
                   </Card>
@@ -73,12 +69,12 @@ function Quiz() {
             </CardGroup>
           );
         })}
-        <div className="ml-auto my-2 my-lg-0">
-            <a className="btn btn-dark rounded-pill" href="/score">Submit Quiz!</a>
+
+        <div className="text-center">
+            <a className="btn btn-dark rounded-pill" href="/score" onClick={(e)=>handleSubmitQuiz()}>Submit Quiz!</a>
         </div>
       </Container>
   );
 }
 
 export default Quiz;
-// export score;
