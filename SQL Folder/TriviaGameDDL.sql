@@ -6,7 +6,7 @@ CREATE SCHEMA IF NOT EXISTS TriviaGameDDL;
 USE TriviaGameDDL;
 
 CREATE TABLE IF NOT EXISTS Username (
-  username VARCHAR(45) NOT NULL,
+  username VARCHAR(45),
   PRIMARY KEY (username),
   UNIQUE INDEX username_UNIQUE (username ASC) VISIBLE)
 ;
@@ -17,8 +17,7 @@ CREATE TABLE IF NOT EXISTS Quiz (
   NumberCorrect INT NOT NULL,
   TotalQuestions INT NOT NULL,
   Score DOUBLE AS (NumberCorrect / TotalQuestions * 100),
-  Username_username VARCHAR(45) NOT NULL,
-  PRIMARY KEY (QuizId, Username_username),
+  Username_username VARCHAR(45),
     FOREIGN KEY (Username_username)
     REFERENCES TriviaGameDDL.Username (username)
    )
