@@ -12,7 +12,7 @@ function NavBar() {
                 <div className="collapse navbar-collapse" id="navbarToggler">
                     <ul className="navbar-nav ml-lg-5 mt-3 mt-lg-0">
                         <li className="nav-item">
-                            <a className="nav-link" href="/">Start a Quiz-</a>
+                            <a className="nav-link" href="/">Start a Quiz</a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="/signup">Sign Up</a>

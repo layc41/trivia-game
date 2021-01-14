@@ -1,20 +1,37 @@
 import React, { useState } from "react";
-import { Container, Col, Card, CardGroup, Row} from "react-bootstrap";
+import { Container, Col, Card, CardGroup, Row } from "react-bootstrap";
 import { generateQuiz } from "../utils/API";
 
 function Quiz() {
+    let black = '#292f36'
+    let red = '#ff6b6b'
     const [quizData, setQuizData] = useState([]);
     const [answersArray, setAnswersArray] = useState([]);
     const [score, setScore] = useState(0);
+    const [toggleCreateBtn, setToggleCreateBtn] = useState(true);
+    const [toggleAnswer, setToggleAnswer] = useState(false);
 
+    var ToggleQuizButton = () => (
+      <div className="text-center">
+        <button onClick={handleFormSubmit} className="btn btn-dark rounded-pill">Create Quiz</button>
+      </div>
+    )
+
+    var ToggleSubmitButton = () => (
+      <div className="text-center">
+        <a className="btn btn-dark rounded-pill" href="/score" onClick={(e)=>handleSubmitQuiz()}>Submit Quiz!</a>
+      </div>
+    )
+    
     const handleFormSubmit = async (event) => {
-
+        
         event.preventDefault();
         try {
             
             await generateQuiz()
             .then((response) => response.json())
-            .then((data) => setQuizData(JSON.parse(JSON.stringify(data.results).replace(/&quot;/g, "''").replace(/&#039;/g, "'"))));
+            .then((data) => setQuizData(JSON.parse(JSON.stringify(data.results).replace(/&quot;/g, "''").replace(/&#039;/g, "'"))))
+            .then(setToggleCreateBtn(!toggleCreateBtn));
             
         } catch (error) {
 
@@ -23,8 +40,13 @@ function Quiz() {
         }
     }
 
+    // const selectedAnswer = () => toggleAnswer ?  : 'black' 
+
+
     const handleClickAnswer = (event, bool) => {
         
+        setToggleAnswer(!toggleAnswer) // may delete later 
+
         let id = event.target.id;
         let answer = id.split('-')[1];
         let questionIndex = id.split('-')[0];
@@ -32,7 +54,7 @@ function Quiz() {
         
         myArray[questionIndex] = (answer === 'true');
         setAnswersArray(myArray);
-
+        
     }
 
     const handleSubmitQuiz = (event) => {
@@ -44,10 +66,6 @@ function Quiz() {
 
     return (
       <Container>
-        <div className="text-center">
-          <button onClick={handleFormSubmit} className="btn btn-dark rounded-pill">Create Quiz</button>
-        </div>
-        
         {quizData.map((quiz, index) => {
           return (
             <CardGroup key={index}>
@@ -59,8 +77,21 @@ function Quiz() {
                         {quiz.question}
                       </Card.Title>
                       <Card.Text className='text-center'>
-                        <button className="btn btn-primary" id={index+"-true"} onClick={(e)=>handleClickAnswer(e,true)}>True</button>
-                        <button className="btn btn-primary" id={index+"-false"} onClick={(e)=>handleClickAnswer(e,false)}>False</button>
+                        <button 
+                          className="btn btn-primary myDiv" 
+                          id={index+"-true"} 
+                          onClick={(e)=> {
+                            handleClickAnswer(e,true);
+                            // selectedAnswer();
+                            }}
+                          >True</button>
+                        <button 
+                          className="btn btn-primary myDiv" 
+                          id={index+"-false"} 
+                          onClick={(e)=> {
+                            handleClickAnswer(e,false)
+                            }}
+                        >False</button>
                       </Card.Text>
                     </Card.Body>
                   </Card>
@@ -69,11 +100,10 @@ function Quiz() {
             </CardGroup>
           );
         })}
-
         <div className="text-center">
-            <a className="btn btn-dark rounded-pill" href="/score" onClick={(e)=>handleSubmitQuiz()}>Submit Quiz!</a>
-        </div>
-      </Container>
+          { toggleCreateBtn ? <ToggleQuizButton /> : <ToggleSubmitButton />}
+        </div> 
+    </Container>
   );
 }
 

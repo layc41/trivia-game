@@ -21,7 +21,7 @@ function Footer() {
         
         <a href='https://github.com/shanat24' target='blank'>
           <img src={logo} className='footer-icon' alt='logo'></img>
-          <h6 className='footerName'>Shantoria</h6>
+          <h6 className='footerName'>Shana</h6>
         </a>
         <a href='https://github.com/tylerhansen22' target='blank'>
           <img src={logo} className='footer-icon' alt='logo'></img>

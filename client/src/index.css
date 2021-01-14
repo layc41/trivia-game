@@ -136,7 +136,7 @@ footer {
 
 a {
   text-decoration: none;
-  color: #e63946;
+  color: #ffffff!important;
 }
 
 .title-heading {
@@ -211,4 +211,8 @@ a {
 
  .red {
     background-color: #ff6b6b;
+ }
+
+ .myDiv:hover {
+   color: #ff6b6b; 
  }
