@@ -213,6 +213,8 @@ a {
     background-color: #ff6b6b;
  }
 
- .myDiv:hover {
-   color: #ff6b6b; 
+ .empty {
+  text-align: center;
  }
+
+ 

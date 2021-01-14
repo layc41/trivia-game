@@ -3,16 +3,15 @@ import { Container, Col, Card, CardGroup, Row } from "react-bootstrap";
 import { generateQuiz } from "../utils/API";
 
 function Quiz() {
-  let black = "#292f36";
+  let white = "#ffffff";
   let red = "#ff6b6b";
   const [quizData, setQuizData] = useState([]);
   const [answersArray, setAnswersArray] = useState([]);
   const [score, setScore] = useState(0);
   const [toggleCreateBtn, setToggleCreateBtn] = useState(true);
-  const [toggleAnswer, setToggleAnswer] = useState(false);
+  const [selectedTrueColor, setSelectedTrueColor] = useState(white);//({'color': null});
+  const [selectedFalseColor, setSelectedFalseColor] = useState(white);//({'color': null});
   const [submitBtn, setSubmitBtn] = useState(false);
-
-  const addOne = () => setScore(score + 1);
 
   var ToggleQuizButton = () => (
     <div className="text-center">
@@ -31,9 +30,7 @@ function Quiz() {
         className="btn btn-dark rounded-pill"
         href="/score"
         onClick={(e) => {
-          // setScore(score + 1)
           setSubmitBtn(!submitBtn);
-          // handleSubmitQuiz();
         }}
       >
         Submit Quiz!
@@ -56,16 +53,13 @@ function Quiz() {
             )
           )
         )
-        .then(setToggleCreateBtn(!toggleCreateBtn));
     } catch (error) {
       console.error(error);
     }
   };
 
-  // const selectedAnswer = () => toggleAnswer ?  : 'black'
 
   const handleClickAnswer = (event, bool) => {
-    setToggleAnswer(!toggleAnswer); // may delete later
 
     let id = event.target.id;
     let answer = id.split("-")[1];
@@ -77,11 +71,22 @@ function Quiz() {
     console.log(myArray);
   };
 
+  const changeTrueColor = (event) => {
+    let id = event.target.id;
+    let divToColor = document.getElementById(id); // .style
+    // <div className={`box ${isBoxVisible ? "" : "hidden"}`}>
 
-  // return a (score) to back end
-  // get quiz stats from back end
+    selectedTrueColor === red ? setSelectedTrueColor(white) : setSelectedTrueColor(red);
+  }
 
-  // GET "/getQuizStats(int score)"
+  const changeFalseColor = (event) => {
+    let id = event.target.id;
+    selectedFalseColor === red ? setSelectedFalseColor(white) : setSelectedFalseColor(red);
+  }
+// return a (score) to back end
+// get quiz stats from back end
+
+// GET "/getQuizStats(int score)"
 //   {
 //     "number right": 1,
 //   "total questions": 10,
@@ -104,8 +109,10 @@ function Quiz() {
   }, [submitBtn]);
 
   return (
-    <Container>
+    <Container >
+
       {quizData.map((quiz, index) => {
+        console.log('HEEYYYY');
         return (
           <CardGroup key={index}>
             <Row>
@@ -120,20 +127,25 @@ function Quiz() {
                       {quiz.question}
                     </Card.Title>
                     <Card.Text className="text-center">
+                      {/* <div className={`box ${isBoxVisible ? "" : "hidden"}`}> */}
                       <button
-                        className="btn btn-primary myDiv"
+                        className={`btn ${selectedTrueColor} ? "" : ${selectedTrueColor}`}
                         id={index + "-true"}
+                        // style={{background: selectedTrueColor}}
                         onClick={(e) => {
                           handleClickAnswer(e, true);
+                          changeTrueColor(e);
                         }}
                       >
                         True
                       </button>
                       <button
-                        className="btn btn-primary myDiv"
+                        className="btn"
                         id={index + "-false"}
+                        style={{background: selectedFalseColor}}
                         onClick={(e) => {
                           handleClickAnswer(e, false);
+                          changeFalseColor(e);
                         }}
                       >
                         False
@@ -149,6 +161,7 @@ function Quiz() {
       <div className="text-center">
         {toggleCreateBtn ? <ToggleQuizButton /> : <ToggleSubmitButton />}
       </div>
+      {/* <div className='empty'>{() => decodeEntities()}</div> */}
     </Container>
   );
 }
