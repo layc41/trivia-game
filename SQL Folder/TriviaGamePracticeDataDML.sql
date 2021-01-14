@@ -1,25 +1,25 @@
-Use TriviaGame;
+Use TriviaGameDDL;
 
-DESC `user`;
+DESC Username;
 
-INSERT INTO `user`(userId, `password`, email, username)
-	VALUES(1, "root", "sandy@gmail.com", "Sandy1"),
-    (2, "root2", "claudia@gmial.com", "Claudia1"),
-    (3, "root3", "tyler@gmail.com", "Tyler1"),
-    (4, "root4", "daniel@gmail.com", "Daniel1"),
-    (5, "root5", "shantoria@gmail.com", "Shantoria1");
+INSERT INTO Username (username)
+	VALUES("Sandy1"),
+    ("Claudia1"),
+    ("Tyler1"),
+    ("Daniel1"),
+    ("Shantoria1");
     
-DESC `quiz`;
+DESC Quiz;
 
-INSERT INTO `quiz`(QuizId, NumberCorrect, TotalQuestions, Score, User_UserId)
-VALUES (1, 5, 10, 50, 1),
-(2, 6, 10, 50, 2),
-(3, 7, 10, 70, 3),
-(4, 8, 10, 80, 4),
-(5, 9, 10, 90, 5),
-(6, 10, 10, 100, 1),
-(7, 1, 10, 10, 2),
-(8, 2, 10, 20, 3),
-(9, 3, 10, 30, 4),
-(10, 4, 10, 40, 5),
-(11, 5, 10, 50, 1); 
+INSERT INTO Quiz (QuizId, NumberCorrect, TotalQuestions, Score, Username_username)
+VALUES (1, 5, 10, 50, "Sandy1"),
+(2, 6, 10, 50, "Claudia1"),
+(3, 7, 10, 70, "Tyler1"),
+(4, 8, 10, 80, "Daniel1"),
+(5, 9, 10, 90, "Shantoria1"),
+(6, 10, 10, 100, "Sandy1"),
+(7, 1, 10, 10, "Claudia1"),
+(8, 2, 10, 20, "Tyler1"),
+(9, 3, 10, 30, "Daniel1"),
+(10, 4, 10, 40, "Shantoria1"),
+(11, 5, 10, 50, "Sandy1"); 

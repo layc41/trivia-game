@@ -1,25 +1,26 @@
 
-DROP SCHEMA IF EXISTS TriviaGame ;
+DROP SCHEMA IF EXISTS TriviaGameDDL;
 
-CREATE SCHEMA IF NOT EXISTS TriviaGame;
-USE TriviaGame ;
 
-CREATE TABLE IF NOT EXISTS `User` (
-  UserId INT NOT NULL,
-  `Password` VARCHAR(45) NULL,
-  Email VARCHAR(45) NOT NULL,
-  Username VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`UserId`),
-  UNIQUE INDEX `Email_UNIQUE` (`Email` ASC) VISIBLE,
-  UNIQUE INDEX `Username_UNIQUE` (`Username` ASC) VISIBLE);
+CREATE SCHEMA IF NOT EXISTS TriviaGameDDL;
+USE TriviaGameDDL;
+
+CREATE TABLE IF NOT EXISTS Username (
+  username VARCHAR(45) NOT NULL,
+  PRIMARY KEY (username),
+  UNIQUE INDEX username_UNIQUE (username ASC) VISIBLE)
+;
 
 
 CREATE TABLE IF NOT EXISTS Quiz (
   QuizId INT NOT NULL,
-  NumberCorrect INT NULL,
-  TotalQuestions INT NULL,
-  Score INT NULL,
-  User_UserId INT NOT NULL,
-  PRIMARY KEY (`QuizId`, `User_UserId`),
-    FOREIGN KEY (`User_UserId`)
-    REFERENCES `TriviaGame`.`User` (`UserId`));
+  NumberCorrect VARCHAR(45) NOT NULL,
+  TotalQuestions VARCHAR(45) NOT NULL,
+  Score VARCHAR(45) NOT NULL,
+  Username_username VARCHAR(45) NOT NULL,
+  PRIMARY KEY (QuizId, Username_username),
+    FOREIGN KEY (Username_username)
+    REFERENCES TriviaGameDDL.Username (username)
+   )
+;
+
