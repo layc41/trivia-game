@@ -14,8 +14,8 @@ CREATE TABLE IF NOT EXISTS Username (
 
 CREATE TABLE IF NOT EXISTS Quiz (
   QuizId INT NOT NULL,
-  NumberCorrect VARCHAR(45) NOT NULL,
-  TotalQuestions VARCHAR(45) NOT NULL,
+  NumberCorrect INT NOT NULL,
+  TotalQuestions INT NOT NULL,
   Score DOUBLE AS (NumberCorrect / TotalQuestions * 100),
   Username_username VARCHAR(45),
     FOREIGN KEY (Username_username)
