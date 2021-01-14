@@ -9,8 +9,8 @@ function Quiz() {
   const [answersArray, setAnswersArray] = useState([]);
   const [score, setScore] = useState(0);
   const [toggleCreateBtn, setToggleCreateBtn] = useState(true);
-  const [selectedTrueColor, setSelectedTrueColor] = useState(white);//({'color': null});
-  const [selectedFalseColor, setSelectedFalseColor] = useState(white);//({'color': null});
+  const [selectedTrueColor, setSelectedTrueColor] = useState("white");//({'color': null});
+  const [selectedFalseColor, setSelectedFalseColor] = useState("white");//({'color': null});
   const [submitBtn, setSubmitBtn] = useState(false);
 
   var ToggleQuizButton = () => (
@@ -129,12 +129,12 @@ function Quiz() {
                     <Card.Text className="text-center">
                       {/* <div className={`box ${isBoxVisible ? "" : "hidden"}`}> */}
                       <button
-                        className={`btn ${selectedTrueColor} ? "" : ${selectedTrueColor}`}
+                        className={`btn ${selectedTrueColor ? "" : selectedTrueColor}`}
                         id={index + "-true"}
                         // style={{background: selectedTrueColor}}
                         onClick={(e) => {
                           handleClickAnswer(e, true);
-                          changeTrueColor(e);
+                          // changeTrueColor(e);
                         }}
                       >
                         True

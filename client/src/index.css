@@ -217,4 +217,11 @@ a {
   text-align: center;
  }
 
+ /* state: color: "#FFFFFF" 
+ state: color: "white"
+ */
+ 
+ .white {
+  background-color: #ffffff;  
+ }
  
