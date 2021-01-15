@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Container, Col, Card, CardGroup, Row } from "react-bootstrap";
-import { generateQuiz } from "../utils/API";
+import { generateQuiz, postAddQuiz, getQuizById } from "../utils/API";
 
 function Quiz() {
   let white = "#ffffff";
   let red = "#ff6b6b";
   const [quizData, setQuizData] = useState([]);
-  const [answersArray, setAnswersArray] = useState([]);
+  const [answersArray, setAnswersArray] = useState([true, true, true, true, true, true, true, true, true, true]);
   const [score, setScore] = useState(0);
   const [toggleCreateBtn, setToggleCreateBtn] = useState(true);
-  const [selectedTrueColor, setSelectedTrueColor] = useState("white");//({'color': null});
-  const [selectedFalseColor, setSelectedFalseColor] = useState("white");//({'color': null});
+  const [selectedTrueColor, setSelectedTrueColor] = useState("white");
+  const [selectedFalseColor, setSelectedFalseColor] = useState("white");
   const [submitBtn, setSubmitBtn] = useState(false);
+  const [gameID, setGameID] = useState();
 
   var ToggleQuizButton = () => (
     <div className="text-center">
@@ -30,7 +31,9 @@ function Quiz() {
         className="btn btn-dark rounded-pill"
         href="/score"
         onClick={(e) => {
-          setSubmitBtn(!submitBtn);
+          // setSubmitBtn(!submitBtn);
+         
+          handleSubmitQuiz();
         }}
       >
         Submit Quiz!
@@ -38,8 +41,11 @@ function Quiz() {
     </div>
   );
 
+
   const handleCreateQuizBtn = async (event) => {
     event.preventDefault();
+
+    setToggleCreateBtn(!toggleCreateBtn);
 
     try {
       await generateQuiz()
@@ -72,47 +78,130 @@ function Quiz() {
   };
 
   const changeTrueColor = (event) => {
-    let id = event.target.id;
-    let divToColor = document.getElementById(id); // .style
+    // let id = event.target.id;
+    // let divToColor = document.getElementById(id); // .style
     // <div className={`box ${isBoxVisible ? "" : "hidden"}`}>
 
     selectedTrueColor === red ? setSelectedTrueColor(white) : setSelectedTrueColor(red);
   }
 
   const changeFalseColor = (event) => {
-    let id = event.target.id;
+    // let id = event.target.id;
     selectedFalseColor === red ? setSelectedFalseColor(white) : setSelectedFalseColor(red);
   }
-// return a (score) to back end
-// get quiz stats from back end
+  // return a (score) to back end
+  // get quiz stats from back end
 
-// GET "/getQuizStats(int score)"
-//   {
-//     "number right": 1,
-//   "total questions": 10,
-//   'calculated score': 1/10 = 10%
-// }
-  
+  // GET "/getQuizStats(int score)"
+  //   {
+  //     "number right": 1,
+  //   "total questions": 10,
+  //   'calculated score': 1/10 = 10%
+  // }
 
-  useEffect(() => {
+
+  // useEffect(() => {
+  //   let correctAnswerArr = quizData.map((quiz) => quiz.correct_answer);
+  //   let checkAnswersArray = [];
+  //   let numberCorrect = 0;
+  //   for (let i = 0; i < correctAnswerArr.length; i++) {
+  //     if (correctAnswerArr[i] === "True" && answersArray[i] === true) {
+  //       checkAnswersArray[i] = "Correct";
+  //       numberCorrect = numberCorrect + 1;
+  //       console.log('numberCorrect: ', numberCorrect)
+  //     } else checkAnswersArray[i] = "Wrong";
+  //   }
+
+  //   const result = checkAnswersArray.filter(answer => answer === 'Correct');
+  //   console.log('result', result.length)
+  //   console.log('numberCorrect:', numberCorrect)
+
+  //   console.log("second numberCorrect: ", numberCorrect);
+  //   setScore(numberCorrect);
+  //   console.log('correct: ', score);
+  //   console.log("postAddQuiz called");
+  //   console.log('checkAnswersArray', checkAnswersArray)
+
+  // }, [submitBtn]);
+
+
+  const handleSubmitQuiz = async () => {
     let correctAnswerArr = quizData.map((quiz) => quiz.correct_answer);
     let checkAnswersArray = [];
-    let numberCorrect = 0;
+  
     for (let i = 0; i < correctAnswerArr.length; i++) {
       if (correctAnswerArr[i] === "True" && answersArray[i] === true) {
         checkAnswersArray[i] = "Correct";
-        numberCorrect = numberCorrect + 1;
       } else checkAnswersArray[i] = "Wrong";
     }
 
-    setScore(numberCorrect);
-  }, [submitBtn]);
+    const result = checkAnswersArray.filter(answer => answer === 'Correct');
+
+    let quizObject = {
+      "totalQuestion": "10",
+      "numberCorrect": result.length.toString()
+    }
+
+    console.log("quizObject: ", quizObject); 
+    console.log('result', result.length)
+    console.log('checkAnswersArray', checkAnswersArray)
+
+    alert(`your quiz ID is ${0}! You finished with a score of: ${result.length/10 * 100}`);
+
+    // try {
+    //   // const response = await postAddQuiz(quizObject);
+    //   // const quizObjectData = await response.json();
+    //   // console.log("quizObjectData: ", quizObjectData);
+
+    //   // setGameID(quizObjectData.gameID);
+    //   // console.log("gameID",gameID);
+    //   // const response2 = await getQuizById(quizObjectData.gameID);
+    //   // console.log("response2", response2);
+    //   // const quizStatsData = await response2.json();
+    //   // console.log("quizStatsData: ", quizStatsData);
+
+    // } catch (err) {
+    //   console.error(err);
+    // }
+
+    // var localGameID = null;
+    // postAddQuiz(quizObject)
+    //   .then((response) => response.json())
+    //   .then((data) => localGameID = data.gameID)
+    //   .then(console.log('localGameID: ', localGameID))
+    //   .then(getQuizById("10")
+    //     .then((response) => response.json())
+       
+    //     .then((data) => console.log("quiz stats: ", data))
+    //   );
+  }
+
+  // const handleCreateQuizBtn = async (event) => {
+  //   event.preventDefault();
+
+  //   setToggleCreateBtn(!toggleCreateBtn);
+
+  //   try {
+  //     await generateQuiz()
+  //       .then((response) => response.json())
+  //       .then((data) =>
+  //         setQuizData(
+  //           JSON.parse(
+  //             JSON.stringify(data.results)
+  //               .replace(/&quot;/g, "''")
+  //               .replace(/&#039;/g, "'")
+  //           )
+  //         )
+  //       )
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   return (
     <Container >
 
       {quizData.map((quiz, index) => {
-        console.log('HEEYYYY');
         return (
           <CardGroup key={index}>
             <Row>
@@ -142,7 +231,7 @@ function Quiz() {
                       <button
                         className="btn"
                         id={index + "-false"}
-                        style={{background: selectedFalseColor}}
+                        style={{ background: selectedFalseColor }}
                         onClick={(e) => {
                           handleClickAnswer(e, false);
                           changeFalseColor(e);
@@ -165,5 +254,6 @@ function Quiz() {
     </Container>
   );
 }
+
 
 export default Quiz;

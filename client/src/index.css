@@ -222,6 +222,207 @@ a {
  */
  
  .white {
-  background-color: #ffffff;  
+  background-color: #ffffff; 
+  outline-style: double; 
  }
  
+ /* #ff6b6b */
+#true-0 :active{
+    background:white;
+    outline-style: double;
+}
+
+#true-1 :active{
+    background:white;
+    outline-style: double;
+}
+
+#true-2 :active{
+    background:white;
+    outline-style: double;
+}
+
+#true-3 :active{
+    background:white;
+    outline-style: double;
+}
+
+#true-4 :active{
+    background:white;
+    outline-style: double;
+}
+
+#true-5 :active{
+    background:white;
+    outline-style: double;
+}
+
+#true-6 :active{
+    background:white;
+    outline-style: double;
+}
+
+#true-7 :active{
+    background:white;
+    outline-style: double;
+}
+
+#true-8 :active{
+    background:white;
+    outline-style: double;
+}
+
+#true-9 :active{
+    background:white;
+    outline-style: double;
+}
+
+#false-0 :active{
+    background:#ff6b6b ;
+    outline-style: double;
+}
+
+#false-1 :active{
+    background:#ff6b6b ;
+    outline-style: double;
+}
+
+#false-2 :active{
+    background:#ff6b6b ;
+    outline-style: double;
+}
+
+#false-3 :active{
+    background:#ff6b6b ;
+    outline-style: double;
+}
+
+#false-4 :active{
+    background:#ff6b6b ;
+    outline-style: double;
+}
+
+#false-5 :active{
+    background:#ff6b6b ;
+    outline-style: double;
+}
+
+#false-6 :active{
+    background:#ff6b6b ;
+    outline-style: double;
+}
+
+#false-7 :active{
+    background:#ff6b6b ;
+    outline-style: double;
+}
+
+#false-8 :active{
+    background:#ff6b6b ;
+    outline-style: double;
+}
+
+#false-9 :active{
+    background:#ff6b6b ;
+    outline-style: double;
+}
+
+#true-0 :hover{
+    background:#ffc594;
+    outline-style: double;
+}
+
+#true-1 :hover{
+    background:#ffc594;
+    outline-style: double;
+}
+
+#true-2 :hover{
+    background:#ffc594;
+    outline-style: double;
+}
+
+#true-3 :hover{
+    background:#ffc594;
+    outline-style: double;
+}
+
+#true-4 :hover{
+    background:#ffc594;
+    outline-style: double;
+}
+
+#true-5 :hover{
+    background:#ffc594;
+    outline-style: double;
+}
+
+#true-6 :hover{
+    background:#ffc594;
+    outline-style: double;
+}
+
+#true-7 :hover{
+    background:#ffc594;
+    outline-style: double;
+}
+
+#true-8 :hover{
+    background:#ffc594;
+    outline-style: double;
+}
+
+#true-9 :hover{
+    background:#ffc594;
+    outline-style: double;
+}
+
+#false-0 :hover{
+    background:#ead3d7 ;
+    outline-style: double;
+}
+
+#false-1 :hover{
+    background:#ead3d7 ;
+    outline-style: double;
+}
+
+#false-2 :hover{
+    background:#ead3d7 ;
+    outline-style: double;
+}
+
+#false-3 :hover{
+    background:#ead3d7 ;
+    outline-style: double;
+}
+
+#false-4 :hover{
+    background:#ead3d7 ;
+    outline-style: double;
+}
+
+#false-5 :hover{
+    background:#ead3d7 ;
+    outline-style: double;
+}
+
+#false-6 :hover{
+    background:#ead3d7 ;
+    outline-style: double;
+}
+
+#false-7 :hover{
+    background:#ead3d7 ;
+    outline-style: double;
+}
+
+#false-8 :hover{
+    background:#ead3d7 ;
+    outline-style: double;
+}
+
+#false-9 :hover{
+    background:#ead3d7 ;
+    outline-style: double;
+}
